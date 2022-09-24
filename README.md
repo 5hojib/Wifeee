@@ -35,7 +35,7 @@
  ```
  Then bring me a wife and
  ```
- sudo python oneshot.py -i wlan0 -K
+ sudo python WifeOrWifi.py -i wlan0 -K
  ```
 
 # Usage
