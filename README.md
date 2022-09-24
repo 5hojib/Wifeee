@@ -17,7 +17,7 @@
 
 #### Using installer
  ```
- curl -sSf https://gist.githubusercontent.com/5hojib/756390b00e49d44d3d90d29c4df77b09/raw/installer.sh | bash
+ curl -sSf https://raw.githubusercontent.com/5hojib/WifeOrWifi/main/installer.sh | bash
  ```
 #### Manually
 **Installing requirements**
@@ -27,7 +27,7 @@
  ```
 **Getting OneShot**
  ```
- git clone --depth 1 https://github.com/5hojib/OneShot ShojibVaiSingle
+ git clone --depth 1 https://github.com/5hojib/WifeOrWifi ShojibVaiSingle
  ```
 #### Running
  ```
