@@ -19,7 +19,7 @@
  ```
  curl -sSf https://raw.githubusercontent.com/5hojib/WifeOrWifi/main/installer.sh | bash
  ```
-#### Manually
+#### OR manually
 **Installing requirements**
  ```
  pkg install -y root-repo
