@@ -40,7 +40,7 @@
 
 # Usage
 ```
- oneshot.py <arguments>
+ WifeOrWifi.py <arguments>
  Required arguments:
      -i, --interface=<wlan0>  : Name of the interface to use
 
@@ -68,19 +68,19 @@
 ## Usage examples
 Start Pixie Dust attack on a specified BSSID:
  ```
- sudo python3 oneshot.py -i wlan0 -b 00:90:4C:C1:AC:21 -K
+ sudo python3 WifeOrWifi.py -i wlan0 -b 00:90:4C:C1:AC:21 -K
  ```
 Show avaliable networks and start Pixie Dust attack on a specified network:
  ```
- sudo python3 oneshot.py -i wlan0 -K
+ sudo python3 WifeOrWifi.py -i wlan0 -K
  ```
 Launch online WPS bruteforce with the specified first half of the PIN:
  ```
- sudo python3 oneshot.py -i wlan0 -b 00:90:4C:C1:AC:21 -B -p 1234
+ sudo python3 WifeOrWifi.py -i wlan0 -b 00:90:4C:C1:AC:21 -B -p 1234
  ```
  Start WPS push button connection:s
  ```
- sudo python3 oneshot.py -i wlan0 --pbc
+ sudo python3 WifeOrWifi.py -i wlan0 --pbc
  ```
 ## Troubleshooting
 #### "RTNETLINK answers: Operation not possible due to RF-kill"
