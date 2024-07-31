@@ -1365,8 +1365,8 @@ class WiFiScanner:
                     if networks[int(network_no)]["ESSID"] is None:
                         return networks[int(network_no)]["BSSID"]
                     return networks[int(network_no)][
-                            "BSSID"
-                        ], networks[int(network_no)]["ESSID"]
+                        "BSSID"
+                    ], networks[int(network_no)]["ESSID"]
                 raise IndexError
             except Exception:
                 print("Invalid number")
