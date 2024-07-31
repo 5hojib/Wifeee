@@ -945,7 +945,7 @@ class Companion:
                 with contextlib.suppress(FileNotFoundError):
                     os.remove(filename)
             return True
-        elif pixiemode:
+        if pixiemode:
             if self.pixie_creds.got_all():
                 pin = self.__runPixiewps(showpixiecmd, pixieforce)
                 if pin:
@@ -956,14 +956,12 @@ class Companion:
                         store_pin_on_fail=True,
                     )
                 return False
-            else:
-                print("[!] Not enough data to run Pixie Dust attack")
-                return False
-        else:
-            if store_pin_on_fail:
-                # Saving Pixiewps calculated PIN if can't connect
-                self.__savePin(bssid, pin)
+            print("[!] Not enough data to run Pixie Dust attack")
             return False
+        if store_pin_on_fail:
+            # Saving Pixiewps calculated PIN if can't connect
+            self.__savePin(bssid, pin)
+        return False
 
     def __first_half_bruteforce(self, bssid, f_half, delay=None):
         """
@@ -977,7 +975,7 @@ class Companion:
             if self.connection_status.isFirstHalfValid():
                 print("[+] First half found")
                 return f_half
-            elif self.connection_status.status == "WPS_FAIL":
+            if self.connection_status.status == "WPS_FAIL":
                 print(
                     "[!] WPS transaction failed, re-trying last pin"
                 )
@@ -1003,7 +1001,7 @@ class Companion:
             self.single_connection(bssid, pin)
             if self.connection_status.last_m_message > 6:
                 return pin
-            elif self.connection_status.status == "WPS_FAIL":
+            if self.connection_status.status == "WPS_FAIL":
                 print(
                     "[!] WPS transaction failed, re-trying last pin"
                 )
@@ -1098,13 +1096,13 @@ class WiFiScanner:
                 encoding="utf-8",
                 errors="replace",
             ) as file:
-                csvReader = csv.reader(
+                csv_reader = csv.reader(
                     file, delimiter=";", quoting=csv.QUOTE_ALL
                 )
                 # Skip header
-                next(csvReader)
+                next(csv_reader)
                 self.stored = []
-                for row in csvReader:
+                for row in csv_reader:
                     self.stored.append(
                         (
                             row[1],  # BSSID
@@ -1149,7 +1147,7 @@ class WiFiScanner:
         def handle_level(line, result, networks):
             networks[-1]["Level"] = int(float(result.group(1)))
 
-        def handle_securityType(line, result, networks):
+        def handle_security_type(line, result, networks):
             sec = networks[-1]["Security type"]
             if result.group(1) == "capability":
                 if "Privacy" in result.group(2):
@@ -1172,7 +1170,7 @@ class WiFiScanner:
         def handle_wps(line, result, networks):
             networks[-1]["WPS"] = result.group(1)
 
-        def handle_wpsLocked(line, result, networks):
+        def handle_wps_locked(line, result, networks):
             flag = int(result.group(1), 16)
             if flag:
                 networks[-1]["WPS locked"] = True
@@ -1219,19 +1217,19 @@ class WiFiScanner:
             re.compile(
                 r"signal: ([+-]?([0-9]*[.])?[0-9]+) dBm"
             ): handle_level,
-            re.compile(r"(capability): (.+)"): handle_securityType,
+            re.compile(r"(capability): (.+)"): handle_security_type,
             re.compile(
                 r"(RSN):\t [*] Version: (\d+)"
-            ): handle_securityType,
+            ): handle_security_type,
             re.compile(
                 r"(WPA):\t [*] Version: (\d+)"
-            ): handle_securityType,
+            ): handle_security_type,
             re.compile(
                 r"WPS:\t [*] Version: (([0-9]*[.])?[0-9]+)"
             ): handle_wps,
             re.compile(
                 r" [*] AP setup locked: (0x[0-9]+)"
-            ): handle_wpsLocked,
+            ): handle_wps_locked,
             re.compile(r" [*] Model: (.*)"): handle_model,
             re.compile(
                 r" [*] Model Number: (.*)"
@@ -1263,7 +1261,7 @@ class WiFiScanner:
         }
 
         # Printing scanning results as table
-        def truncateStr(s, length, postfix="…"):
+        def truncate_str(s, length, postfix="…"):
             """
             Truncate string with the specified length
             @s — input string
@@ -1319,8 +1317,8 @@ class WiFiScanner:
             model = "{} {}".format(
                 network["Model"], network["Model number"]
             )
-            essid = truncateStr(network["ESSID"], 25)
-            deviceName = truncateStr(network["Device name"], 27)
+            essid = truncate_str(network["ESSID"], 25)
+            device_name = truncate_str(network["Device name"], 27)
             line = (
                 "{:<4} {:<18} {:<25} {:<8} {:<4} {:<27} {:<}".format(
                     number,
@@ -1328,7 +1326,7 @@ class WiFiScanner:
                     essid,
                     network["Security type"],
                     network["Level"],
-                    deviceName,
+                    device_name,
                     model,
                 )
             )
@@ -1358,20 +1356,18 @@ class WiFiScanner:
             return None
         while 1:
             try:
-                networkNo = input(
+                network_no = input(
                     "Select target (press Enter to refresh): "
                 )
-                if networkNo.lower() in ("r", "0", ""):
+                if network_no.lower() in ("r", "0", ""):
                     return self.prompt_network()
-                elif int(networkNo) in networks:
-                    if networks[int(networkNo)]["ESSID"] is None:
-                        return networks[int(networkNo)]["BSSID"]
-                    else:
-                        return networks[int(networkNo)][
+                if int(network_no) in networks:
+                    if networks[int(network_no)]["ESSID"] is None:
+                        return networks[int(network_no)]["BSSID"]
+                    return networks[int(network_no)][
                             "BSSID"
-                        ], networks[int(networkNo)]["ESSID"]
-                else:
-                    raise IndexError
+                        ], networks[int(network_no)]["ESSID"]
+                raise IndexError
             except Exception:
                 print("Invalid number")
         return None
