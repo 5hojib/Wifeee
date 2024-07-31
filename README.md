@@ -1,87 +1,95 @@
-## Overview
+# Wifeee
 
-**WifeOrWifi** performs [Pixie Dust attack](https://forums.kali.org/showthread.php?24286-WPS-Pixie-Dust-Attack-Offline-WPS-Attack) without having to switch to monitor mode.
+Wifeee performs the [Pixie Dust attack](https://forums.kali.org/showthread.php?24286-WPS-Pixie-Dust-Attack-Offline-WPS-Attack) without requiring monitor mode.
 
 ## Features
- - Pixie Dust attack.
- - integrated 3WiFi offline WPS PIN generator.
- - online WPS bruteforce.
- - Wi-Fi scanner with highlighting based on iw.
+
+- Pixie Dust attack
+- Integrated 3WiFi offline WPS PIN generator
+- Online WPS brute force
+- Wi-Fi scanner with highlighting based on `iw`
 
 ## Requirements
- - [Turmux Latest](https://termux.com)
- - Rooted phone
- - Android 9+
 
-## Setup 
+- [Termux Latest](https://termux.com)
+- Rooted phone
+- Android 9+
 
-### Using installer
- ```
- curl -sSf https://raw.githubusercontent.com/5hojib/WifeOrWifi/main/installer.sh | bash
- ```
+## Setup
+
+### Using Installer
+
+```
+curl -sSf https://raw.githubusercontent.com/5hojib/Wifeee/main/installer.sh | bash
+```
 
 ### Running
- ```
- cd ShojibVaiSingle
- ```
- Then bring me a wife and
- ```
- sudo python WifeOrWifi.py -i wlan0 -K
- ```
+
+```
+sudo python Wifee/boom.py -i wlan0 -K
+```
 
 ## Usage
+
 ```
- WifeOrWifi.py <arguments>
- Required arguments:
-     -i, --interface=<wlan0>  : Name of the interface to use
+Wifee/boom.py <arguments>
 
- Optional arguments:
-     -b, --bssid=<mac>        : BSSID of the target AP
-     -p, --pin=<wps pin>      : Use the specified pin (arbitrary string or 4/8 digit pin)
-     -K, --pixie-dust         : Run Pixie Dust attack
-     -B, --bruteforce         : Run online bruteforce attack
-     --push-button-connect    : Run WPS push button connection
+Required arguments:
+  -i, --interface=<wlan0> : Name of the interface to use
 
- Advanced arguments:
-     -d, --delay=<n>          : Set the delay between pin attempts [0]
-     -w, --write              : Write AP credentials to the file on success
-     -F, --pixie-force        : Run Pixiewps with --force option (bruteforce full range)
-     -X, --show-pixie-cmd     : Alway print Pixiewps command
-     --vuln-list=<filename>   : Use custom file with vulnerable devices list ['vulnwsc.txt']
-     --iface-down             : Down network interface when the work is finished
-     -l, --loop               : Run in a loop
-     -r, --reverse-scan       : Reverse order of networks in the list of networks. Useful on small displays
-     --mtk-wifi               : Activate MediaTek Wi-Fi interface driver on startup and deactivate it on exit
-                                (for internal Wi-Fi adapters implemented in MediaTek SoCs). Turn off Wi-Fi in the system settings before using this.
-     -v, --verbose            : Verbose output
- ```
+Optional arguments:
+  -b, --bssid=<mac>       : BSSID of the target AP
+  -p, --pin=<wps pin>     : Use the specified pin (arbitrary string or 4/8 digit pin)
+  -K, --pixie-dust        : Run Pixie Dust attack
+  -B, --bruteforce        : Run online brute force attack
+  --push-button-connect   : Run WPS push button connection
 
-## Usage examples
+Advanced arguments:
+  -d, --delay=<n>         : Set the delay between pin attempts [0]
+  -w, --write             : Write AP credentials to file on success
+  -F, --pixie-force       : Run Pixiewps with --force option (brute force full range)
+  -X, --show-pixie-cmd    : Always print Pixiewps command
+  --vuln-list=<filename>  : Use custom file with vulnerable devices list ['vulnwsc.txt']
+  --iface-down            : Down network interface when work is finished
+  -l, --loop              : Run in a loop
+  -r, --reverse-scan      : Reverse order of networks in the list (useful on small displays)
+  --mtk-wifi              : Activate MediaTek Wi-Fi interface driver on startup and deactivate it on exit
+                              (for internal Wi-Fi adapters implemented in MediaTek SoCs). Turn off Wi-Fi in system settings before using this.
+  -v, --verbose           : Verbose output
+```
+
+## Usage Examples
 
 Start Pixie Dust attack on a specified BSSID:
- ```
- sudo python3 WifeOrWifi.py -i wlan0 -b 00:90:4C:C1:AC:21 -K
- ```
-Show avaliable networks and start Pixie Dust attack on a specified network:
- ```
- sudo python3 WifeOrWifi.py -i wlan0 -K
- ```
-Launch online WPS bruteforce with the specified first half of the PIN:
- ```
- sudo python3 WifeOrWifi.py -i wlan0 -b 00:90:4C:C1:AC:21 -B -p 1234
- ```
- Start WPS push button connection:s
- ```
- sudo python3 WifeOrWifi.py -i wlan0 --pbc
- ```
+
+```
+sudo python3 Wifee/boom.py -i wlan0 -b 00:90:4C:C1:AC:21 -K
+```
+
+Show available networks and start Pixie Dust attack on a specified network:
+
+```
+sudo python3 Wifee/boom.py -i wlan0 -K
+```
+
+Launch online WPS brute force with the specified first half of the PIN:
+
+```
+sudo python3 Wifee/boom.py -i wlan0 -b 00:90:4C:C1:AC:21 -B -p 1234
+```
+
+Start WPS push button connection:
+
+```
+sudo python3 Wifee/boom.py -i wlan0 --push-button-connect
+```
+
 ## Troubleshooting
 
-#### "RTNETLINK answers: Operation not possible due to RF-kill"
- Just run:
-```sudo rfkill unblock wifi```
+#### Device or resource busy (-16)
 
-#### "Device or resource busy (-16)"
- Try disabling Wi-Fi in the system settings and kill the Network manager. Alternatively, you can try running OneShot with ```--iface-down``` argument.
+- Disable Wi-Fi in the system settings.
 
-#### The wlan0 interface disappears when Wi-Fi is disabled on Android devices with MediaTek SoC
- Try running OneShot with the `--mtk-wifi` flag to initialize Wi-Fi device driver.
+#### The `wlan0` interface disappears when Wi-Fi is disabled on Android devices with MediaTek SoC
+
+- Run OneShot with the `--mtk-wifi` flag to initialize the Wi-Fi device driver.
