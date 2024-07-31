@@ -23,3 +23,7 @@ select = [
     "PL",   # pylint
     "ARG",  # flake8-unused-arguments
 ]
+
+ignore = [
+    "E501",
+]
