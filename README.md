@@ -26,13 +26,13 @@ curl -sSf https://raw.githubusercontent.com/5hojib/Wifeee/main/installer.sh | ba
 ### Running
 
 ```
-sudo python Wifee/boom.py -i wlan0 -K
+sudo python Wifeee/boom.py -i wlan0 -K
 ```
 
 ## Usage
 
 ```
-Wifee/boom.py <arguments>
+Wifeee/boom.py <arguments>
 
 Required arguments:
   -i, --interface=<wlan0> : Name of the interface to use
@@ -63,25 +63,25 @@ Advanced arguments:
 Start Pixie Dust attack on a specified BSSID:
 
 ```
-sudo python3 Wifee/boom.py -i wlan0 -b 00:90:4C:C1:AC:21 -K
+sudo python3 Wifeee/boom.py -i wlan0 -b 00:90:4C:C1:AC:21 -K
 ```
 
 Show available networks and start Pixie Dust attack on a specified network:
 
 ```
-sudo python3 Wifee/boom.py -i wlan0 -K
+sudo python3 Wifeee/boom.py -i wlan0 -K
 ```
 
 Launch online WPS brute force with the specified first half of the PIN:
 
 ```
-sudo python3 Wifee/boom.py -i wlan0 -b 00:90:4C:C1:AC:21 -B -p 1234
+sudo python3 Wifeee/boom.py -i wlan0 -b 00:90:4C:C1:AC:21 -B -p 1234
 ```
 
 Start WPS push button connection:
 
 ```
-sudo python3 Wifee/boom.py -i wlan0 --push-button-connect
+sudo python3 Wifeee/boom.py -i wlan0 --push-button-connect
 ```
 
 ## Troubleshooting
