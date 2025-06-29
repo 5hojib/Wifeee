@@ -1,8 +1,8 @@
-# WifeOrWifi
+# wifee
 
 
 # Overview
-**WifeOrWifi** performs [Pixie Dust attack](https://forums.kali.org/showthread.php?24286-WPS-Pixie-Dust-Attack-Offline-WPS-Attack) without having to switch to monitor mode.
+**wifee** performs [Pixie Dust attack](https://forums.kali.org/showthread.php?24286-WPS-Pixie-Dust-Attack-Offline-WPS-Attack) without having to switch to monitor mode.
 # Features
  - Pixie Dust attack.
  - integrated 3WiFi offline WPS PIN generator.
@@ -17,7 +17,7 @@
 
 #### Using installer
  ```
- curl -sSf https://raw.githubusercontent.com/5hojib/WifeOrWifi/main/installer.sh | bash
+ curl -sSf https://raw.githubusercontent.com/5hojib/wifee/main/installer.sh | bash
  ```
 #### OR manually
 **Installing requirements**
@@ -27,20 +27,20 @@
  ```
 **Getting OneShot**
  ```
- git clone --depth 1 https://github.com/5hojib/WifeOrWifi ShojibVaiSingle
+ git clone --depth 1 https://github.com/5hojib/wifee house
  ```
 #### Running
  ```
- cd ShojibVaiSingle
+ cd house
  ```
  Then bring me a wife and
  ```
- sudo python WifeOrWifi.py -i wlan0 -K
+ sudo python wifee.py -i wlan0 -K
  ```
 
 # Usage
 ```
- WifeOrWifi.py <arguments>
+ wifee.py <arguments>
  Required arguments:
      -i, --interface=<wlan0>  : Name of the interface to use
 
@@ -68,19 +68,19 @@
 ## Usage examples
 Start Pixie Dust attack on a specified BSSID:
  ```
- sudo python3 WifeOrWifi.py -i wlan0 -b 00:90:4C:C1:AC:21 -K
+ sudo python3 wifee.py -i wlan0 -b 00:90:4C:C1:AC:21 -K
  ```
 Show avaliable networks and start Pixie Dust attack on a specified network:
  ```
- sudo python3 WifeOrWifi.py -i wlan0 -K
+ sudo python3 wifee.py -i wlan0 -K
  ```
 Launch online WPS bruteforce with the specified first half of the PIN:
  ```
- sudo python3 WifeOrWifi.py -i wlan0 -b 00:90:4C:C1:AC:21 -B -p 1234
+ sudo python3 wifee.py -i wlan0 -b 00:90:4C:C1:AC:21 -B -p 1234
  ```
  Start WPS push button connection:s
  ```
- sudo python3 WifeOrWifi.py -i wlan0 --pbc
+ sudo python3 wifee.py -i wlan0 --pbc
  ```
 ## Troubleshooting
 #### "RTNETLINK answers: Operation not possible due to RF-kill"
